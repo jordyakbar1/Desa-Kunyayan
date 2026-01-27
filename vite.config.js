@@ -6,9 +6,19 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/css/app.css',
+                'resources/css/styles.css',
+                'resources/css/carousel.css',
                 'resources/js/app.js',
             ],
             refresh: true,
         }),
     ],
+    build: {
+        rollupOptions: {
+            input: {
+                main: 'resources/js/app.js',
+            },
+        },
+        assetsDir: 'assets',
+    },
 });

@@ -1,11 +1,114 @@
 {
-  "resources/css/app.css": {
-    "file": "assets/app-ce75e8be.css",
-    "isEntry": true,
-    "src": "resources/css/app.css"
+  "resources/images/bg-img.png": {
+    "file": "assets/bg-img-e841a817.png",
+    "src": "resources/images/bg-img.png"
+  },
+  "resources/images/icon-bhp.png": {
+    "file": "assets/icon-bhp-8f8871c6.png",
+    "src": "resources/images/icon-bhp.png"
+  },
+  "resources/images/icon-clock.png": {
+    "file": "assets/icon-clock-5db19a51.png",
+    "src": "resources/images/icon-clock.png"
+  },
+  "resources/images/icon-fam.png": {
+    "file": "assets/icon-fam-23001593.png",
+    "src": "resources/images/icon-fam.png"
+  },
+  "resources/images/icon-lpm.png": {
+    "file": "assets/icon-lpm-bf34e209.png",
+    "src": "resources/images/icon-lpm.png"
+  },
+  "resources/images/icon-mail.png": {
+    "file": "assets/icon-mail-cf695ee9.png",
+    "src": "resources/images/icon-mail.png"
+  },
+  "resources/images/icon-man.png": {
+    "file": "assets/icon-man-68d95875.png",
+    "src": "resources/images/icon-man.png"
+  },
+  "resources/images/icon-mitigasi1.png": {
+    "file": "assets/icon-mitigasi1-1d340251.png",
+    "src": "resources/images/icon-mitigasi1.png"
+  },
+  "resources/images/icon-mitigasi10.png": {
+    "file": "assets/icon-mitigasi10-83593b11.png",
+    "src": "resources/images/icon-mitigasi10.png"
+  },
+  "resources/images/icon-mitigasi11.png": {
+    "file": "assets/icon-mitigasi11-c2e6d802.png",
+    "src": "resources/images/icon-mitigasi11.png"
+  },
+  "resources/images/icon-mitigasi2.png": {
+    "file": "assets/icon-mitigasi2-722c1001.png",
+    "src": "resources/images/icon-mitigasi2.png"
+  },
+  "resources/images/icon-mitigasi3.png": {
+    "file": "assets/icon-mitigasi3-ab7c5aae.png",
+    "src": "resources/images/icon-mitigasi3.png"
+  },
+  "resources/images/icon-mitigasi4.png": {
+    "file": "assets/icon-mitigasi4-de3643cf.png",
+    "src": "resources/images/icon-mitigasi4.png"
+  },
+  "resources/images/icon-mitigasi5.png": {
+    "file": "assets/icon-mitigasi5-fe96ca23.png",
+    "src": "resources/images/icon-mitigasi5.png"
+  },
+  "resources/images/icon-mitigasi6.png": {
+    "file": "assets/icon-mitigasi6-ca077edf.png",
+    "src": "resources/images/icon-mitigasi6.png"
+  },
+  "resources/images/icon-mitigasi7.png": {
+    "file": "assets/icon-mitigasi7-ccd201c6.png",
+    "src": "resources/images/icon-mitigasi7.png"
+  },
+  "resources/images/icon-mitigasi8.png": {
+    "file": "assets/icon-mitigasi8-5cb388ad.png",
+    "src": "resources/images/icon-mitigasi8.png"
+  },
+  "resources/images/icon-mitigasi9.png": {
+    "file": "assets/icon-mitigasi9-b49c0ddd.png",
+    "src": "resources/images/icon-mitigasi9.png"
+  },
+  "resources/images/icon-pekon.png": {
+    "file": "assets/icon-pekon-1c3097c3.png",
+    "src": "resources/images/icon-pekon.png"
+  },
+  "resources/images/icon-peta_administrasi.png": {
+    "file": "assets/icon-peta_administrasi-86c0ea54.png",
+    "src": "resources/images/icon-peta_administrasi.png"
+  },
+  "resources/images/icon-peta_bencana.png": {
+    "file": "assets/icon-peta_bencana-98538e40.png",
+    "src": "resources/images/icon-peta_bencana.png"
+  },
+  "resources/images/icon-phonecall.png": {
+    "file": "assets/icon-phonecall-5f03f5ab.png",
+    "src": "resources/images/icon-phonecall.png"
+  },
+  "resources/images/icon-pin.png": {
+    "file": "assets/icon-pin-cdc8899a.png",
+    "src": "resources/images/icon-pin.png"
+  },
+  "resources/images/icon-ppl.png": {
+    "file": "assets/icon-ppl-825e1536.png",
+    "src": "resources/images/icon-ppl.png"
+  },
+  "resources/images/icon-tanggamus.png": {
+    "file": "assets/icon-tanggamus-39c4011b.png",
+    "src": "resources/images/icon-tanggamus.png"
+  },
+  "resources/images/icon-woman.png": {
+    "file": "assets/icon-woman-050420ce.png",
+    "src": "resources/images/icon-woman.png"
+  },
+  "resources/images/peta-jalur-evakuasi.png": {
+    "file": "assets/peta-jalur-evakuasi-a150d085.png",
+    "src": "resources/images/peta-jalur-evakuasi.png"
   },
   "resources/js/app.js": {
-    "file": "assets/app-02dd6d25.js",
+    "file": "assets/main-02dd6d25.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   }
