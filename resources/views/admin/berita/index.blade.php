@@ -1,129 +1,199 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kades - Admin</title>
+    <title>Kelola Berita - Admin</title>
     @vite(['resources/css/styles.css'])
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <style>
-        .form-container {
-            margin-top: 30px;
-            padding: 20px;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+        body {
+            background-color: #f5f5f5;
         }
-
-        .form-container label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
+        .admin-wrapper {
+            display: flex;
+            min-height: 100vh;
         }
-
-        .form-container input {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+        .admin-sidebar {
+            width: 250px;
+            background-color: #40BFE1;
+            padding: 2rem 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
         }
-
-        .form-container button {
-            padding: 10px 20px;
-            background-color: #28a745;
+        .admin-sidebar h3 {
             color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
+            padding: 0 1.5rem;
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
         }
-
-        .form-container button:hover {
-            background-color: #218838;
+        .admin-sidebar a {
+            display: block;
+            color: white;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            border-left: 4px solid transparent;
+            transition: all 0.3s;
+        }
+        .admin-sidebar a:hover,
+        .admin-sidebar a.active {
+            background-color: rgba(255,255,255,0.1);
+            border-left-color: white;
+        }
+        .admin-content {
+            margin-left: 250px;
+            padding: 2rem;
+            flex: 1;
+        }
+        .admin-header {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .admin-header h1 {
+            color: #40BFE1;
+            margin: 0;
+        }
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-primary {
+            background-color: #40BFE1;
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #2da9cc;
+        }
+        .btn-danger {
+            background-color: #e74c3c;
+            color: white;
+        }
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+        .berita-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .berita-table th {
+            background-color: #40BFE1;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+        .berita-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        .berita-table tr:hover {
+            background-color: #f5f5f5;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .empty-message {
+            text-align: center;
+            color: #999;
+            padding: 3rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .logout-btn {
+            background-color: #e74c3c;
+            color: white !important;
+            margin-top: 2rem;
+        }
+        .logout-btn:hover {
+            background-color: #c0392b !important;
         }
     </style>
 </head>
-
 <body>
-    <header>
-        <div class="logo-container">
-            <img src="{{ Vite::asset('resources/images/icon-tanggamus.png') }}" alt="Logo Kabupaten Tanggamus"
-                class="logo-header">
-            <div class="logo-text">
-                <h1>Pekon Kunyayan</h1>
-                <p>Kabupaten Tanggamus</p>
-            </div>
+    <div class="admin-wrapper">
+        <!-- Sidebar -->
+        <div class="admin-sidebar">
+            <h3>Admin Panel</h3>
+            <a href="{{ route('admin.home') }}">Dashboard</a>
+            <a href="{{ route('admin.berita.index') }}" class="active">Kelola Berita</a>
+            <a href="{{ route('admin.stats.edit') }}">Edit Infografis</a>
+            <form action="{{ route('logout') }}" method="POST" style="margin-top: 2rem;">
+                @csrf
+                <button type="submit" class="logout-btn" style="width: 100%; border: none; cursor: pointer; text-align: left;">Logout</button>
+            </form>
         </div>
-        <nav>
-            <ul style="list-style: none; display: inline;">
-                <li style="display: inline; margin-right: 10px;">
-                    <a href="{{ route('admin.home') }}">Home</a>
-                </li>
-                <li style="display: inline; margin-right: 10px;">
-                    <a href="{{ route('admin.berita.index') }}">Berita</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
 
-    <main>
-        {{-- konten --}}
-        <div class="form-container">
-            <h2>Manajemen Berita</h2>
-            <a href="{{ route('admin.berita.create') }}" class="btn btn-success mb-3">Tambah Berita</a>
+        <!-- Main Content -->
+        <div class="admin-content">
+            <div class="admin-header">
+                <h1>Kelola Berita</h1>
+                <a href="{{ route('admin.berita.create') }}" class="btn btn-primary">+ Tambah Berita</a>
+            </div>
 
             @if (session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
+                <div style="background-color: #d4edda; border: 1px solid #c3e6cb; color: #155724; padding: 1rem; border-radius: 5px; margin-bottom: 1rem;">
+                    {{ session('success') }}
+                </div>
             @endif
 
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Foto</th>
-                        <th>Judul</th>
-                        <th>Tempat Kegiatan</th>
-                        <th>Tanggal Kegiatan</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($beritas as $index => $berita)
+            @if ($beritas->count() > 0)
+                <table class="berita-table">
+                    <thead>
                         <tr>
-                            <td>{{ $index + 1 }}</td>
-                            <td>
-                                @if ($berita->photo)
-                                    <img src="{{ asset('storage/' . $berita->photo) }}" class="img-thumbnail"
-                                        width="100">
-                                @endif
-                            </td>
-                            <td>{{ $berita->judul }}</td>
-                            <td>{{ $berita->tempat }}</td>
-                            <td>{{ $berita->tanggal }}</td>
-                            <td>
-                                <a href="{{ route('admin.berita.edit', $berita->id) }}"
-                                    class="btn btn-warning btn-sm">Edit</a>
-                                <form action="{{ route('admin.berita.destroy', $berita->id) }}" method="POST"
-                                    style="display:inline;"
-                                    onsubmit="return confirm('Apakah Anda yakin ingin menghapus berita ini?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                                </form>
-                            </td>
+                            <th>Judul</th>
+                            <th>Penulis</th>
+                            <th>Tanggal</th>
+                            <th>Dibaca</th>
+                            <th>Aksi</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach ($beritas as $berita)
+                            <tr>
+                                <td>{{ Str::limit($berita->title, 50) }}</td>
+                                <td>{{ $berita->author }}</td>
+                                <td>{{ $berita->created_at->translatedFormat('d M Y') }}</td>
+                                <td>{{ $berita->views }}</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <a href="{{ route('admin.berita.edit', $berita->id) }}" class="btn btn-primary btn-small">Edit</a>
+                                        <form action="{{ route('admin.berita.destroy', $berita->id) }}" method="POST" style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-small" onclick="return confirm('Yakin ingin hapus?')">Hapus</button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @else
+                <div class="empty-message">
+                    <p>Belum ada berita. <a href="{{ route('admin.berita.create') }}" style="color: #40BFE1;">Buat berita baru</a></p>
+                </div>
+            @endif
         </div>
-        {{-- end konten --}}
-    </main>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-
+    </div>
 </body>
-
 </html>

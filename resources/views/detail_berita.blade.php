@@ -36,39 +36,21 @@
                     <a href="{{ route('mitigasi') }}" class="{{ Request::is('mitigasi') ? 'active' : '' }}">Mitigasi
                         Bencana</a>
                 </li>
+                <li>
+                    <a href="{{ route('berita.index') }}" class="{{ Request::is('berita') ? 'active' : '' }}">Berita</a>
+                </li>
                 @auth
                     @if (auth()->user()->hasRole('admin'))
                         <li>
-                            <a href="{{ route('admin.home') }}"
-                                class="{{ Request::is('admin/home') ? 'active' : '' }}">Dashboard</a>
+                            <a href="{{ route('admin.home') }}" class="{{ Request::is('admin/home') ? 'active' : '' }}">Dashboard</a>
                         </li>
                         <li>
-                            <a href="{{ route('admin.stats.edit') }}"
-                                class="{{ Request::is('admin/stats/edit') ? 'active' : '' }}">Edit Stats</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('admin.kades.index') }}"
-                                class="{{ Request::is('admin/kades') ? 'active' : '' }}">Kades</a>
-                        </li>
-                        <li style="display: inline; margin-right: 10px;">
-                            <a href="{{ route('admin.berita.index') }}">Berita</a>
-                        </li>
-                    @endif
-                    <li>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button type="submit" class="logout-button">
-                                Logout
-                            </button>
-                        </form>
-                    </li>
-                @else
-                    <li>
-                        <a href="{{ route('login') }}">Log in</a>
-                    </li>
-                    @if (Route::has('register'))
-                        <li>
-                            <a href="{{ route('register') }}">Register</a>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="logout-button">
+                                    Logout
+                                </button>
+                            </form>
                         </li>
                     @endif
                 @endauth
@@ -78,24 +60,25 @@
     </header>
     <main>
         <section class="berita-detail container py-5">
-            <h1 class="h3 mb-4">{{ $berita->judul }}</h1>
+            <h1 class="h3 mb-4">{{ $berita->title }}</h1>
 
             <!-- Image -->
-            <img src="{{ asset('storage/' . $berita->photo) }}" alt="{{ $berita->judul }}" class="img-fluid mb-4"
-                style="object-fit: cover; height: 400px; margin-left: auto; margin-right: auto; display: block;">
+            @if($berita->image_url)
+                <img src="{{ asset('storage/' . $berita->image_url) }}" alt="{{ $berita->title }}" class="img-fluid mb-4"
+                    style="object-fit: cover; height: 400px; margin-left: auto; margin-right: auto; display: block;">
+            @endif
 
-            <!-- Metadata (place and date) -->
+            <!-- Metadata (author and date) -->
             <p class="card-text text-muted" style="font-size: 14px">
-                {{ \Carbon\Carbon::parse($berita->tanggal)->format('d F Y') }},
-                Admin
+                {{ $berita->created_at->translatedFormat('d F Y') }},
+                {{ $berita->author }}
             </p>
-            <!-- Description -->
-            <p><b>{{ $berita->tempat }},
-                    {{ \Carbon\Carbon::parse($berita->tanggal)->format('d F Y') }}
-                </b>{{ $berita->deskripsi }}</p>
+            
+            <!-- Content -->
+            <p>{{ $berita->content }}</p>
 
             <!-- Optional: Add a back button or similar link -->
-            <a href="{{ url()->previous() }}" class="btn btn-secondary mt-3">Back</a>
+            <a href="{{ route('berita.index') }}" class="btn btn-secondary mt-3">Kembali ke Berita</a>
         </section>
     </main>
 

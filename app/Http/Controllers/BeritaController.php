@@ -12,7 +12,8 @@ class BeritaController extends Controller
      */
     public function index()
     {
-        //
+        $beritas = Berita::latest()->paginate(10);
+        return view('admin.berita.index', compact('beritas'));
     }
 
     /**
@@ -20,7 +21,7 @@ class BeritaController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.berita.create');
     }
 
     /**
@@ -28,7 +29,21 @@ class BeritaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'author' => 'required|string|max:255',
+            'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        if ($request->hasFile('image_url')) {
+            $validated['image_url'] = $request->file('image_url')->store('berita', 'public');
+        }
+
+        $validated['views'] = 0;
+        Berita::create($validated);
+
+        return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil ditambahkan');
     }
 
     /**
@@ -44,7 +59,7 @@ class BeritaController extends Controller
      */
     public function edit(Berita $berita)
     {
-        //
+        return view('admin.berita.edit', compact('berita'));
     }
 
     /**
@@ -52,7 +67,20 @@ class BeritaController extends Controller
      */
     public function update(Request $request, Berita $berita)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'author' => 'required|string|max:255',
+            'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        if ($request->hasFile('image_url')) {
+            $validated['image_url'] = $request->file('image_url')->store('berita', 'public');
+        }
+
+        $berita->update($validated);
+
+        return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil diperbarui');
     }
 
     /**
@@ -60,6 +88,7 @@ class BeritaController extends Controller
      */
     public function destroy(Berita $berita)
     {
-        //
+        $berita->delete();
+        return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil dihapus');
     }
 }

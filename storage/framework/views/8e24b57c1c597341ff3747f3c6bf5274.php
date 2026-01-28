@@ -37,38 +37,21 @@
                     <a href="<?php echo e(route('mitigasi')); ?>" class="<?php echo e(Request::is('mitigasi') ? 'active' : ''); ?>">Mitigasi
                         Bencana</a>
                 </li>
+                <li>
+                    <a href="<?php echo e(route('berita.index')); ?>" class="<?php echo e(Request::is('berita') ? 'active' : ''); ?>">Berita</a>
+                </li>
                 <?php if(auth()->guard()->check()): ?>
                     <?php if(auth()->user()->hasRole('admin')): ?>
                         <li>
-                            <a href="<?php echo e(route('admin.home')); ?>"
-                                class="<?php echo e(Request::is('admin/home') ? 'active' : ''); ?>">Dashboard</a>
+                            <a href="<?php echo e(route('admin.home')); ?>" class="<?php echo e(Request::is('admin/home') ? 'active' : ''); ?>">Dashboard</a>
                         </li>
                         <li>
-                            <a href="<?php echo e(route('admin.stats.edit')); ?>"
-                                class="<?php echo e(Request::is('admin/stats/edit') ? 'active' : ''); ?>">Edit Stats</a>
-                        </li>
-                        <li style="display: inline; margin-right: 10px;">
-                            <a href="<?php echo e(route('admin.kades.index')); ?>">Kades</a>
-                        </li>
-                        <li style="display: inline; margin-right: 10px;">
-                            <a href="<?php echo e(route('admin.berita.index')); ?>">Berita</a>
-                        </li>
-                    <?php endif; ?>
-                    <li>
-                        <form method="POST" action="<?php echo e(route('logout')); ?>">
-                            <?php echo csrf_field(); ?>
-                            <button type="submit" class="logout-button">
-                                Logout
-                            </button>
-                        </form>
-                    </li>
-                <?php else: ?>
-                    <li>
-                        <a href="<?php echo e(route('login')); ?>">Log in</a>
-                    </li>
-                    <?php if(Route::has('register')): ?>
-                        <li>
-                            <a href="<?php echo e(route('register')); ?>">Register</a>
+                            <form method="POST" action="<?php echo e(route('logout')); ?>">
+                                <?php echo csrf_field(); ?>
+                                <button type="submit" class="logout-button">
+                                    Logout
+                                </button>
+                            </form>
                         </li>
                     <?php endif; ?>
                 <?php endif; ?>

@@ -14,8 +14,14 @@ class HomeController extends Controller
         return view('welcome', compact("beritas"));
     }
 
+    public function berita_index(){
+        $beritas = Berita::latest()->paginate(12);
+        return view('berita_index', compact("beritas"));
+    }
+
     public function berita($id){
         $berita = Berita::findOrFail($id);
+        $berita->increment('views');
         return view('detail_berita', compact("berita"));
     }
     

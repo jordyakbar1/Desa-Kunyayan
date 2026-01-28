@@ -33,6 +33,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 Route::get('/', [HomeController::class, 'home'])->name('welcome'); 
 Route::get('/dashboard', [HomeController::class, 'home'])->name('dashboard'); 
 Route::get('/home', [HomeController::class, 'home'])->name('home'); 
+Route::get('/berita', [HomeController::class, 'berita_index'])->name('berita.index');
 Route::get('/berita/{id}', [HomeController::class, 'berita'])->name('berita.show'); 
 Route::get('/profil', [HomeController::class, 'profile'])->name('profil'); 
 

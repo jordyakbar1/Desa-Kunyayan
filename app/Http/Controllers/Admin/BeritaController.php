@@ -10,7 +10,7 @@ class BeritaController extends Controller
 {
     public function index()
     {
-        $beritas = Berita::latest()->get();
+        $beritas = Berita::latest()->paginate(10);
         return view('admin.berita.index', compact('beritas'));
     }
 
@@ -22,22 +22,24 @@ class BeritaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'photo' => 'required|image|mimes:jpg,jpeg,png|max:2048',
-            'judul' => 'required|string|max:255',
-            'deskripsi' => 'required',
-            'tempat' => 'required|string|max:255',
-            'tanggal' => 'required|date',
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'author' => 'required|string|max:255',
+            'image_url' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
         ]);
 
-        $photoPath = $request->file('photo')->store('uploads/berita', 'public');
+        $data = [
+            'title' => $request->title,
+            'content' => $request->content,
+            'author' => $request->author,
+            'views' => 0,
+        ];
 
-        Berita::create([
-            'photo' => $photoPath,
-            'judul' => $request->judul,
-            'deskripsi' => $request->deskripsi,
-            'tempat' => $request->tempat,
-            'tanggal' => $request->tanggal,
-        ]);
+        if ($request->hasFile('image_url')) {
+            $data['image_url'] = $request->file('image_url')->store('berita', 'public');
+        }
+
+        Berita::create($data);
 
         return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil ditambahkan.');
     }
@@ -53,25 +55,26 @@ class BeritaController extends Controller
         $berita = Berita::findOrFail($id);
 
         $request->validate([
-            'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'judul' => 'required|string|max:255',
-            'deskripsi' => 'required',
-            'tempat' => 'required|string|max:255',
-            'tanggal' => 'required|date',
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'author' => 'required|string|max:255',
+            'image_url' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
         ]);
 
-        if ($request->hasFile('photo')) {
-            Storage::disk('public')->delete($berita->photo);
-            $photoPath = $request->file('photo')->store('uploads/berita', 'public');
-            $berita->photo = $photoPath;
+        $data = [
+            'title' => $request->title,
+            'content' => $request->content,
+            'author' => $request->author,
+        ];
+
+        if ($request->hasFile('image_url')) {
+            if ($berita->image_url) {
+                Storage::disk('public')->delete($berita->image_url);
+            }
+            $data['image_url'] = $request->file('image_url')->store('berita', 'public');
         }
 
-        $berita->update([
-            'judul' => $request->judul,
-            'deskripsi' => $request->deskripsi,
-            'tempat' => $request->tempat,
-            'tanggal' => $request->tanggal,
-        ]);
+        $berita->update($data);
 
         return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil diperbarui.');
     }
@@ -79,7 +82,9 @@ class BeritaController extends Controller
     public function destroy($id)
     {
         $berita = Berita::findOrFail($id);
-        Storage::disk('public')->delete($berita->photo);
+        if ($berita->image_url) {
+            Storage::disk('public')->delete($berita->image_url);
+        }
         $berita->delete();
 
         return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil dihapus.');

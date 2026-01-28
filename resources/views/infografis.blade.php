@@ -37,38 +37,21 @@
                     <a href="{{ route('mitigasi') }}" class="{{ Request::is('mitigasi') ? 'active' : '' }}">Mitigasi
                         Bencana</a>
                 </li>
+                <li>
+                    <a href="{{ route('berita.index') }}" class="{{ Request::is('berita') ? 'active' : '' }}">Berita</a>
+                </li>
                 @auth
                     @if (auth()->user()->hasRole('admin'))
                         <li>
-                            <a href="{{ route('admin.home') }}"
-                                class="{{ Request::is('admin/home') ? 'active' : '' }}">Dashboard</a>
+                            <a href="{{ route('admin.home') }}" class="{{ Request::is('admin/home') ? 'active' : '' }}">Dashboard</a>
                         </li>
                         <li>
-                            <a href="{{ route('admin.stats.edit') }}"
-                                class="{{ Request::is('admin/stats/edit') ? 'active' : '' }}">Edit Stats</a>
-                        </li>
-                        <li style="display: inline; margin-right: 10px;">
-                            <a href="{{ route('admin.kades.index') }}">Kades</a>
-                        </li>
-                        <li style="display: inline; margin-right: 10px;">
-                            <a href="{{ route('admin.berita.index') }}">Berita</a>
-                        </li>
-                    @endif
-                    <li>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button type="submit" class="logout-button">
-                                Logout
-                            </button>
-                        </form>
-                    </li>
-                @else
-                    <li>
-                        <a href="{{ route('login') }}">Log in</a>
-                    </li>
-                    @if (Route::has('register'))
-                        <li>
-                            <a href="{{ route('register') }}">Register</a>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="logout-button">
+                                    Logout
+                                </button>
+                            </form>
                         </li>
                     @endif
                 @endauth

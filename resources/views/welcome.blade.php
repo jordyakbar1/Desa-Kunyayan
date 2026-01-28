@@ -53,39 +53,21 @@
                     <a href="{{ route('mitigasi') }}" class="{{ Request::is('mitigasi') ? 'active' : '' }}">Mitigasi
                         Bencana</a>
                 </li>
+                <li>
+                    <a href="{{ route('berita.index') }}" class="{{ Request::is('berita') ? 'active' : '' }}">Berita</a>
+                </li>
                 @auth
                     @if (auth()->user()->hasRole('admin'))
                         <li>
-                            <a href="{{ route('admin.home') }}"
-                                class="{{ Request::is('admin/home') ? 'active' : '' }}">Dashboard</a>
+                            <a href="{{ route('admin.home') }}" class="{{ Request::is('admin/home') ? 'active' : '' }}">Dashboard</a>
                         </li>
                         <li>
-                            <a href="{{ route('admin.stats.edit') }}"
-                                class="{{ Request::is('admin/stats/edit') ? 'active' : '' }}">Edit Stats</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('admin.kades.index') }}"
-                                class="{{ Request::is('admin/kades') ? 'active' : '' }}">Kades</a>
-                        </li>
-                        <li style="display: inline; margin-right: 10px;">
-                            <a href="{{ route('admin.berita.index') }}">Berita</a>
-                        </li>
-                    @endif
-                    <li>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button type="submit" class="logout-button">
-                                Logout
-                            </button>
-                        </form>
-                    </li>
-                @else
-                    <li>
-                        <a href="{{ route('login') }}">Log in</a>
-                    </li>
-                    @if (Route::has('register'))
-                        <li>
-                            <a href="{{ route('register') }}">Register</a>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="logout-button">
+                                    Logout
+                                </button>
+                            </form>
                         </li>
                     @endif
                 @endauth
@@ -112,19 +94,19 @@
                                         <a href="{{ route('berita.show', $berita->id) }}"
                                             class="news-card text-decoration-none">
                                             <div class="card h-100">
-                                                <img src="{{ asset('storage/' . $berita->photo) }}"
-                                                    alt="{{ $berita->judul }}" class="card-img-top"
+                                                @if($berita->image_url)
+                                                <img src="{{ asset('storage/' . $berita->image_url) }}"
+                                                    alt="{{ $berita->title }}" class="card-img-top"
                                                     style="object-fit: cover; height: 200px;">
+                                                @endif
                                                 <div class="card-body">
-                                                    <h4 class="card-title">{{ $berita->judul }}</h4>
+                                                    <h4 class="card-title">{{ $berita->title }}</h4>
                                                     <p class="card-text text-muted" style="font-size: 14px">
-                                                        {{ \Carbon\Carbon::parse($berita->tanggal)->format('d F Y') }},
-                                                        Admin
+                                                        {{ $berita->created_at->translatedFormat('d F Y') }},
+                                                        {{ $berita->author }}
                                                     </p>
                                                     <p class="card-text">
-                                                        <b>{{ $berita->tempat }},
-                                                            {{ \Carbon\Carbon::parse($berita->tanggal)->format('d F Y') }}
-                                                        </b>{{ Str::limit($berita->deskripsi, 50) }}
+                                                        {{ Str::limit($berita->content, 100) }}
                                                     </p>
                                                 </div>
                                             </div>

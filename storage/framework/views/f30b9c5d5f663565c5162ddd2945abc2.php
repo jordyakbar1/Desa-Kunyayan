@@ -53,39 +53,21 @@
                     <a href="<?php echo e(route('mitigasi')); ?>" class="<?php echo e(Request::is('mitigasi') ? 'active' : ''); ?>">Mitigasi
                         Bencana</a>
                 </li>
+                <li>
+                    <a href="<?php echo e(route('berita.index')); ?>" class="<?php echo e(Request::is('berita') ? 'active' : ''); ?>">Berita</a>
+                </li>
                 <?php if(auth()->guard()->check()): ?>
                     <?php if(auth()->user()->hasRole('admin')): ?>
                         <li>
-                            <a href="<?php echo e(route('admin.home')); ?>"
-                                class="<?php echo e(Request::is('admin/home') ? 'active' : ''); ?>">Dashboard</a>
+                            <a href="<?php echo e(route('admin.home')); ?>" class="<?php echo e(Request::is('admin/home') ? 'active' : ''); ?>">Dashboard</a>
                         </li>
                         <li>
-                            <a href="<?php echo e(route('admin.stats.edit')); ?>"
-                                class="<?php echo e(Request::is('admin/stats/edit') ? 'active' : ''); ?>">Edit Stats</a>
-                        </li>
-                        <li>
-                            <a href="<?php echo e(route('admin.kades.index')); ?>"
-                                class="<?php echo e(Request::is('admin/kades') ? 'active' : ''); ?>">Kades</a>
-                        </li>
-                        <li style="display: inline; margin-right: 10px;">
-                            <a href="<?php echo e(route('admin.berita.index')); ?>">Berita</a>
-                        </li>
-                    <?php endif; ?>
-                    <li>
-                        <form method="POST" action="<?php echo e(route('logout')); ?>">
-                            <?php echo csrf_field(); ?>
-                            <button type="submit" class="logout-button">
-                                Logout
-                            </button>
-                        </form>
-                    </li>
-                <?php else: ?>
-                    <li>
-                        <a href="<?php echo e(route('login')); ?>">Log in</a>
-                    </li>
-                    <?php if(Route::has('register')): ?>
-                        <li>
-                            <a href="<?php echo e(route('register')); ?>">Register</a>
+                            <form method="POST" action="<?php echo e(route('logout')); ?>">
+                                <?php echo csrf_field(); ?>
+                                <button type="submit" class="logout-button">
+                                    Logout
+                                </button>
+                            </form>
                         </li>
                     <?php endif; ?>
                 <?php endif; ?>
@@ -112,20 +94,20 @@
                                         <a href="<?php echo e(route('berita.show', $berita->id)); ?>"
                                             class="news-card text-decoration-none">
                                             <div class="card h-100">
-                                                <img src="<?php echo e(asset('storage/' . $berita->photo)); ?>"
-                                                    alt="<?php echo e($berita->judul); ?>" class="card-img-top"
+                                                <?php if($berita->image_url): ?>
+                                                <img src="<?php echo e(asset('storage/' . $berita->image_url)); ?>"
+                                                    alt="<?php echo e($berita->title); ?>" class="card-img-top"
                                                     style="object-fit: cover; height: 200px;">
+                                                <?php endif; ?>
                                                 <div class="card-body">
-                                                    <h4 class="card-title"><?php echo e($berita->judul); ?></h4>
+                                                    <h4 class="card-title"><?php echo e($berita->title); ?></h4>
                                                     <p class="card-text text-muted" style="font-size: 14px">
-                                                        <?php echo e(\Carbon\Carbon::parse($berita->tanggal)->format('d F Y')); ?>,
-                                                        Admin
+                                                        <?php echo e($berita->created_at->translatedFormat('d F Y')); ?>,
+                                                        <?php echo e($berita->author); ?>
+
                                                     </p>
                                                     <p class="card-text">
-                                                        <b><?php echo e($berita->tempat); ?>,
-                                                            <?php echo e(\Carbon\Carbon::parse($berita->tanggal)->format('d F Y')); ?>
-
-                                                        </b><?php echo e(Str::limit($berita->deskripsi, 50)); ?>
+                                                        <?php echo e(Str::limit($berita->content, 100)); ?>
 
                                                     </p>
                                                 </div>

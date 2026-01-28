@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Statistic;
+use App\Models\Berita;
 use Illuminate\Http\Request;
 
 class StatisticController extends Controller
@@ -13,14 +14,17 @@ class StatisticController extends Controller
 
     public function home()
     {
-        $statistic = Statistic::first(); // Adjust this to match your database structure.
-        return view('admin.admin',compact('statistic'));
-    }// Display the stats editing form
+        $total_beritas = Berita::count();
+        $total_views = Berita::sum('views') ?? 0;
+        return view('admin.dashboard', compact('total_beritas', 'total_views'));
+    }
+
     public function stats()
     {
         $statistic = Statistic::first(); // Adjust this to match your database structure.
         return view('infografis',compact('statistic'));
-    }// Display the stats editing form
+    }
+
     public function edit()
     {
         // Fetch the first record (or create a new one if it doesn't exist)

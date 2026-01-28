@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('beritas', function (Blueprint $table) {
             $table->id();
-            $table->string("photo");
-            $table->string("judul");
-            $table->text("deskripsi");
-            $table->string("tempat");
-            $table->string("tanggal");
+            $table->string("title");
+            $table->text("content");
+            $table->string("author");
+            $table->string("image_url")->nullable();
+            $table->integer("views")->default(0);
             $table->timestamps();
         });
     }

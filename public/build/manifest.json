@@ -1,4 +1,19 @@
 {
+  "resources/css/app.css": {
+    "file": "assets/app-7c252c40.css",
+    "isEntry": true,
+    "src": "resources/css/app.css"
+  },
+  "resources/css/carousel.css": {
+    "file": "assets/carousel-3f140b24.css",
+    "isEntry": true,
+    "src": "resources/css/carousel.css"
+  },
+  "resources/css/styles.css": {
+    "file": "assets/styles-b32e0b76.css",
+    "isEntry": true,
+    "src": "resources/css/styles.css"
+  },
   "resources/images/bg-img.png": {
     "file": "assets/bg-img-e841a817.png",
     "src": "resources/images/bg-img.png"
@@ -108,7 +123,7 @@
     "src": "resources/images/peta-jalur-evakuasi.png"
   },
   "resources/js/app.js": {
-    "file": "assets/main-02dd6d25.js",
+    "file": "assets/app-02dd6d25.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   }
