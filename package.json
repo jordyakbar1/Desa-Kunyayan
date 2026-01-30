@@ -1,8 +1,11 @@
 {
     "private": true,
+    "engines": {
+        "node": "18.x"
+    },
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "node ./node_modules/vite/bin/vite.js build"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",
