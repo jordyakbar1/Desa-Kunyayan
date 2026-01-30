@@ -100,7 +100,7 @@
                             <td><img src="{{ asset('storage/' . $row->photo_url) }}" width="50"></td>
                             <td>{{ $row->tahun_jabatan }}</td>
                             <td>
-                                <!-- Tombol Edit -->
+                                <!-- Tombol Edit (modal) -->
                                 <button type="button" class="btn btn-warning btn-edit" data-bs-toggle="modal"
                                     data-bs-target="#editKadesModal" data-id="{{ $row->id }}"
                                     data-name="{{ $row->name }}"
@@ -109,6 +109,9 @@
                                     data-is_current="{{ $row->is_current ? 1 : 0 }}">
                                     Edit
                                 </button>
+
+                                <!-- Open full edit page -->
+                                <a href="{{ route('admin.kades.edit', $row->id) }}" class="btn btn-secondary">Open Edit Page</a>
 
                                 <!-- Tombol Hapus -->
                                 <form action="{{ route('admin.kades.destroy', $row->id) }}" method="POST"
