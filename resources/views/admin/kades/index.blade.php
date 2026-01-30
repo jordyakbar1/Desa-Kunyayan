@@ -140,14 +140,18 @@
                                 <div class="mb-3">
                                     <label>Nama Kades</label>
                                     <input type="text" name="name" class="form-control" required>
+                                    @error('name') <div class="text-danger">{{ $message }}</div> @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label>Foto</label>
-                                    <input type="file" name="photo" class="form-control" required>
+                                    <img id="addPhotoPreview" width="100" class="d-block mb-2" style="display:none">
+                                    <input type="file" name="photo" id="addPhoto" class="form-control" required>
+                                    @error('photo') <div class="text-danger">{{ $message }}</div> @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label>Tahun Jabatan</label>
                                     <input type="text" name="tahun_jabatan" class="form-control" required>
+                                    @error('tahun_jabatan') <div class="text-danger">{{ $message }}</div> @enderror
                                 </div>
                                 <div class="mb-3 form-check">
                                     <input type="hidden" name="is_current" value="0">
@@ -179,17 +183,20 @@
                                 <div class="mb-3">
                                     <label>Nama Kades</label>
                                     <input type="text" id="editName" name="name" class="form-control" required>
+                                    @error('name') <div class="text-danger">{{ $message }}</div> @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label>Foto Saat Ini</label>
                                     <img id="editPhotoPreview" width="100" class="d-block mb-2">
                                     <label>Ganti Foto</label>
-                                    <input type="file" name="photo" class="form-control">
+                                    <input type="file" name="photo" id="editPhoto" class="form-control">
+                                    @error('photo') <div class="text-danger">{{ $message }}</div> @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label>Tahun Jabatan</label>
                                     <input type="text" id="editTahunJabatan" name="tahun_jabatan"
                                         class="form-control" required>
+                                    @error('tahun_jabatan') <div class="text-danger">{{ $message }}</div> @enderror
                                 </div>
                                 <div class="mb-3 form-check">
                                     <input type="hidden" name="is_current" value="0">
@@ -228,6 +235,28 @@
                 let form = document.getElementById("editKadesForm");
                 form.action = "/admin/kades/" + id;
             });
+
+            // Live preview for Add and Edit photo inputs
+            const addPhotoInput = document.getElementById('addPhoto');
+            const addPhotoPreview = document.getElementById('addPhotoPreview');
+            if (addPhotoInput) {
+                addPhotoInput.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (!file) { addPhotoPreview.style.display = 'none'; return; }
+                    addPhotoPreview.src = URL.createObjectURL(file);
+                    addPhotoPreview.style.display = 'block';
+                });
+            }
+
+            const editPhotoInput = document.getElementById('editPhoto');
+            const editPhotoPreview = document.getElementById('editPhotoPreview');
+            if (editPhotoInput) {
+                editPhotoInput.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (!file) { return; }
+                    editPhotoPreview.src = URL.createObjectURL(file);
+                });
+            }
         });
     </script>
 </body>
