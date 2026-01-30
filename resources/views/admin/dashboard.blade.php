@@ -95,6 +95,7 @@
             <h3>Admin Panel</h3>
             <a href="{{ route('admin.home') }}" class="active">Dashboard</a>
             <a href="{{ route('admin.berita.index') }}">Kelola Berita</a>
+            <a href="{{ route('admin.kades.index') }}">Kelola Kepala Pekon</a>
             <a href="{{ route('admin.stats.edit') }}">Edit Infografis</a>
             <form action="{{ route('logout') }}" method="POST" style="margin-top: 2rem;">
                 @csrf
@@ -124,6 +125,7 @@
                 <h2 style="color: #40BFE1; margin-top: 0;">Fitur Management</h2>
                 <ul style="list-style: none; padding: 0;">
                     <li><a href="{{ route('admin.berita.index') }}" style="color: #40BFE1; text-decoration: none; font-weight: bold;">→ Kelola Berita</a></li>
+                    <li><a href="{{ route('admin.kades.index') }}" style="color: #40BFE1; text-decoration: none; font-weight: bold;">→ Kelola Kepala Pekon</a></li>
                     <li><a href="{{ route('admin.stats.edit') }}" style="color: #40BFE1; text-decoration: none; font-weight: bold;">→ Edit Data Infografis</a></li>
                 </ul>
             </div>
