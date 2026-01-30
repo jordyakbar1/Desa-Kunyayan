@@ -56,12 +56,6 @@
                 <li>
                     <a href="{{ route('berita.index') }}" class="{{ Request::is('berita') ? 'active' : '' }}">Berita</a>
                 </li>
-                <!-- Small goto/search bar for quick navigation (type '/login' then Enter) -->
-                <li style="display:inline; margin-left:10px;">
-                    <form id="gotoForm" onsubmit="event.preventDefault(); var v = document.getElementById('gotoInput').value.trim(); if (!v) return; if (!v.startsWith('/')) v = '/' + v; window.location.href = v;" style="display:inline;">
-                        <input id="gotoInput" type="text" placeholder="Type '/login' then Enter" style="padding:4px; border-radius:4px;"> 
-                    </form>
-                </li>
                 @auth
                     @if (auth()->user()->hasRole('admin'))
                         <li>

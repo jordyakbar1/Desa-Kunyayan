@@ -133,8 +133,8 @@
                     </div>
                 </div>
                 <div class="peta-map">
-                    <!-- Replace the image file `resources/images/peta_final.png` with the final map image provided -->
-                    <img src="<?php echo e(Vite::asset('resources/images/peta_final.png')); ?>" alt="Peta Lokasi Desa" class="map-image">
+                    <!-- Replaced with final map image: `resources/images/peta_final.jpg` -->
+                    <img src="<?php echo e(Vite::asset('resources/images/peta_final.jpg')); ?>" alt="Peta Lokasi Desa" class="map-image">
                 </div>
             </div>
         </section>
