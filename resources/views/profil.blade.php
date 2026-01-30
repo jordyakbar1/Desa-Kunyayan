@@ -129,17 +129,34 @@
 
                     <div class="info-box">
                         <h3>Luas Desa:</h3>
-                        <p class="info-value">730.000.000 m²</p>
-                    </div>
-
-                    <div class="info-box">
-                        <h3>Jumlah Penduduk</h3>
-                        <p class="info-value">1.361 Jiwa</p>
+                        <p class="info-value">8900000m^2</p>
                     </div>
                 </div>
                 <div class="peta-map">
-                    <img src="{{ Vite::asset('resources/images/icon-peta_bencana.png') }}" alt="Peta Lokasi Desa" class="map-image">
+                    <!-- Replaced with final map image: `resources/images/peta_final.jpg` -->
+                    <img src="{{ Vite::asset('resources/images/peta_final.jpg') }}" alt="Peta Lokasi Desa" class="map-image">
                 </div>
+            </div>
+        </section>
+
+        <!-- Kepala Pekon dari Masa ke Masa -->
+        <section class="kades-section">
+            <h2 class="section-title main-title" style="color: #40BFE1;">Kepala Pekon dari Masa ke Masa</h2>
+            <div class="kades-grid">
+                @foreach($kades->sortByDesc('is_current') as $k)
+                    <div class="kades-card {{ $k->is_current ? 'kades-current' : ''}}">
+                        <div class="kades-photo">
+                            <img src="{{ asset('storage/' . $k->photo_url) }}" alt="{{ $k->name }}">
+                        </div>
+                        <div class="kades-info">
+                            <h4 class="kades-name">{{ $k->name }}</h4>
+                            <p class="kades-period">Masa Jabatan: {{ $k->tahun_jabatan }}</p>
+                            @if($k->is_current)
+                                <span class="badge-current">Kepala Pekon Saat Ini</span>
+                            @endif
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </section>
 

@@ -10,7 +10,7 @@
     "src": "resources/css/carousel.css"
   },
   "resources/css/styles.css": {
-    "file": "assets/styles-b32e0b76.css",
+    "file": "assets/styles-1dfbe802.css",
     "isEntry": true,
     "src": "resources/css/styles.css"
   },
@@ -118,9 +118,17 @@
     "file": "assets/icon-woman-050420ce.png",
     "src": "resources/images/icon-woman.png"
   },
+  "resources/images/peta final ini.jpg": {
+    "file": "assets/peta final ini-6b9aac08.jpg",
+    "src": "resources/images/peta final ini.jpg"
+  },
   "resources/images/peta-jalur-evakuasi.png": {
-    "file": "assets/peta-jalur-evakuasi-a150d085.png",
-    "src": "resources/images/peta-jalur-evakuasi.png"
+    "file": "assets/peta_final-a150d085.png",
+    "src": "resources/images/peta_final.png"
+  },
+  "resources/images/peta_final.png": {
+    "file": "assets/peta_final-a150d085.png",
+    "src": "resources/images/peta_final.png"
   },
   "resources/js/app.js": {
     "file": "assets/app-02dd6d25.js",

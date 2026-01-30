@@ -105,7 +105,8 @@
                                     data-bs-target="#editKadesModal" data-id="{{ $row->id }}"
                                     data-name="{{ $row->name }}"
                                     data-photo="{{ asset('storage/' . $row->photo_url) }}"
-                                    data-tahun_jabatan="{{ $row->tahun_jabatan }}">
+                                    data-tahun_jabatan="{{ $row->tahun_jabatan }}"
+                                    data-is_current="{{ $row->is_current ? 1 : 0 }}">
                                     Edit
                                 </button>
 
@@ -148,6 +149,11 @@
                                     <label>Tahun Jabatan</label>
                                     <input type="text" name="tahun_jabatan" class="form-control" required>
                                 </div>
+                                <div class="mb-3 form-check">
+                                    <input type="hidden" name="is_current" value="0">
+                                    <input type="checkbox" name="is_current" value="1" class="form-check-input" id="isCurrentAdd">
+                                    <label class="form-check-label" for="isCurrentAdd">Kepala Pekon Saat Ini</label>
+                                </div>
                                 <button type="submit" class="btn btn-success">Simpan</button>
                             </form>
                         </div>
@@ -185,6 +191,11 @@
                                     <input type="text" id="editTahunJabatan" name="tahun_jabatan"
                                         class="form-control" required>
                                 </div>
+                                <div class="mb-3 form-check">
+                                    <input type="hidden" name="is_current" value="0">
+                                    <input type="checkbox" id="editIsCurrent" name="is_current" value="1" class="form-check-input">
+                                    <label class="form-check-label" for="editIsCurrent">Kepala Pekon Saat Ini</label>
+                                </div>
                                 <button type="submit" class="btn btn-success">Update</button>
                             </form>
                         </div>
@@ -206,11 +217,13 @@
                 let name = button.getAttribute("data-name");
                 let photo = button.getAttribute("data-photo");
                 let tahunJabatan = button.getAttribute("data-tahun_jabatan");
+                let isCurrent = button.getAttribute("data-is_current");
 
                 document.getElementById("editId").value = id;
                 document.getElementById("editName").value = name;
                 document.getElementById("editPhotoPreview").src = photo;
                 document.getElementById("editTahunJabatan").value = tahunJabatan;
+                document.getElementById("editIsCurrent").checked = isCurrent == '1';
 
                 let form = document.getElementById("editKadesForm");
                 form.action = "/admin/kades/" + id;

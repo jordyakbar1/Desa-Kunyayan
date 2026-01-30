@@ -129,17 +129,34 @@
 
                     <div class="info-box">
                         <h3>Luas Desa:</h3>
-                        <p class="info-value">730.000.000 m²</p>
-                    </div>
-
-                    <div class="info-box">
-                        <h3>Jumlah Penduduk</h3>
-                        <p class="info-value">1.361 Jiwa</p>
+                        <p class="info-value">8900000m^2</p>
                     </div>
                 </div>
                 <div class="peta-map">
-                    <img src="<?php echo e(Vite::asset('resources/images/icon-peta_bencana.png')); ?>" alt="Peta Lokasi Desa" class="map-image">
+                    <!-- Replace the image file `resources/images/peta_final.png` with the final map image provided -->
+                    <img src="<?php echo e(Vite::asset('resources/images/peta_final.png')); ?>" alt="Peta Lokasi Desa" class="map-image">
                 </div>
+            </div>
+        </section>
+
+        <!-- Kepala Pekon dari Masa ke Masa -->
+        <section class="kades-section">
+            <h2 class="section-title main-title" style="color: #40BFE1;">Kepala Pekon dari Masa ke Masa</h2>
+            <div class="kades-grid">
+                <?php $__currentLoopData = $kades->sortByDesc('is_current'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $k): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <div class="kades-card <?php echo e($k->is_current ? 'kades-current' : ''); ?>">
+                        <div class="kades-photo">
+                            <img src="<?php echo e(asset('storage/' . $k->photo_url)); ?>" alt="<?php echo e($k->name); ?>">
+                        </div>
+                        <div class="kades-info">
+                            <h4 class="kades-name"><?php echo e($k->name); ?></h4>
+                            <p class="kades-period">Masa Jabatan: <?php echo e($k->tahun_jabatan); ?></p>
+                            <?php if($k->is_current): ?>
+                                <span class="badge-current">Kepala Pekon Saat Ini</span>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
         </section>
 
